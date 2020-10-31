@@ -17,7 +17,6 @@ def get_data():
 
         headings.append(th.text)
 
-
     data_raw = []
     for tr in lk_table_data[1:]:
         row = []
@@ -26,7 +25,8 @@ def get_data():
         data_raw.append(row)
     return [headings, data_raw]
 
-def json_out():
+
+def sorted_data():
     data = {"data": []}
     for lk in get_data()[1]:
         tmp = {}
@@ -46,7 +46,11 @@ def json_out():
             tmp["deaths_diff"] = int(re.sub("[^0-9]", "", lk[7]))
 
         data["data"].append(tmp)
-    return json.dumps(data)
+    return data
+
+
+def json_out():
+    return json.dumps(sorted_data())
 
 
 
